@@ -9,6 +9,7 @@ using System.Windows;
 using WeatherApp.Commands;
 using WeatherApp.Services;
 using WeatherApp.Models;
+using System.Diagnostics;
 
 namespace WeatherApp.ViewModels
 {
@@ -83,6 +84,7 @@ namespace WeatherApp.ViewModels
 
         /// <summary>
         /// TODO 13a : Ajouter ChangeLanguageCommand
+        public DelegateCommand<string> ChangeLanguageCommand { get; set; }
         /// </summary>
 
 
@@ -106,6 +108,7 @@ namespace WeatherApp.ViewModels
             /// TODO 03 : Instancier ImportCommand qui doit appeler la méthode Import
             ImportDataCommand = new DelegateCommand<string>(Import);
             /// TODO 13b : Instancier ChangeLanguageCommand qui doit appeler la méthode ChangeLanguage
+            ChangeLanguageCommand = new DelegateCommand<string>(ChangeLanguage);
 
             initViewModels();          
 
@@ -312,6 +315,39 @@ namespace WeatherApp.ViewModels
             /// TODO 13c : Compléter la méthode pour permettre de changer la langue
             /// Ne pas oublier de demander à l'utilisateur de redémarrer l'application
             /// Aide : ApiConsumerDemo
+            /// 
+            if (language != Properties.Settings.Default.Language)
+            {
+                MessageBoxResult result = MessageBox.Show($"{ Properties.Resources.msg_restart}", Properties.Resources.wn_warning, MessageBoxButton.YesNoCancel);
+                switch (result)
+                {//Properties.Resources.TxtMsgBog_Lang
+                    case MessageBoxResult.Yes:
+                        Properties.Settings.Default.Language = language;
+                        Properties.Settings.Default.Save();
+                        restart();
+                        break;
+
+                    case MessageBoxResult.No:
+                        Properties.Settings.Default.Language = language;
+                        Properties.Settings.Default.Save();
+                        break;
+
+                    case MessageBoxResult.Cancel:
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"{ Properties.Resources.msg_alreadylang}", Properties.Resources.wn_warning, MessageBoxButton.OK);
+            }
+        }
+
+        void restart()
+        {
+            var filename = Application.ResourceAssembly.Location;
+            var newFile = Path.ChangeExtension(filename, ".exe");
+            Process.Start(newFile);
+            Application.Current.Shutdown();
         }
 
         #endregion

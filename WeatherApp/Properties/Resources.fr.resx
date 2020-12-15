@@ -154,6 +154,12 @@
   <data name="mi_preferences" xml:space="preserve">
     <value>Préférences...</value>
   </data>
+  <data name="mi_station" xml:space="preserve">
+    <value>Station météo</value>
+  </data>
+  <data name="msg_alreadylang" xml:space="preserve">
+    <value>Vous êtes déjà dans cette langue</value>
+  </data>
   <data name="msg_restart" xml:space="preserve">
     <value>L'application doit redémarrer pour prendre en compte les nouveaux changement.
 Désirez-vous redémarrer?</value>
