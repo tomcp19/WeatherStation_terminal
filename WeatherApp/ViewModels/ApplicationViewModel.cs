@@ -204,10 +204,10 @@ namespace WeatherApp.ViewModels
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    if (openFileDialog.ShowDialog() == true)
+                    if (saveFileDialog.ShowDialog() == true)
                     {
-                        Filename = openFileDialog.FileName;
-                       saveToFile();
+                        Filename = saveFileDialog.FileName;
+                        saveToFile();
                     }
                     break;
 
