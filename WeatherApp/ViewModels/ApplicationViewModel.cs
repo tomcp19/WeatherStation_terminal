@@ -129,13 +129,13 @@ namespace WeatherApp.ViewModels
                 apiKey = AppConfiguration.GetValue("OWApiKey");
             }
 
-            if (string.IsNullOrEmpty(Properties.Settings.Default.apiKey) && apiKey == "")
+            if (string.IsNullOrEmpty(Properties.Settings.Default.apikey) && apiKey == "")
             {
                 tvm.RawText = "Aucune clé API, veuillez la configurer";
             } else
             {
                 if (apiKey == "")
-                    apiKey = Properties.Settings.Default.apiKey;
+                    apiKey = Properties.Settings.Default.apikey;
 
                 ows = new OpenWeatherService(apiKey);
             }
@@ -153,7 +153,7 @@ namespace WeatherApp.ViewModels
         {            
             if (CurrentViewModel is ConfigurationViewModel)
             {
-                ows.SetApiKey(Properties.Settings.Default.apiKey);
+                ows.SetApiKey(Properties.Settings.Default.apikey);
 
                 var vm = (TemperatureViewModel)ViewModels.FirstOrDefault(x => x.Name == typeof(TemperatureViewModel).Name);
                 if (vm.TemperatureService == null)

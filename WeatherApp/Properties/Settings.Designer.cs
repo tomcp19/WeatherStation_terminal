@@ -26,12 +26,12 @@ namespace WeatherApp.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string apiKey {
+        public string apikey {
             get {
-                return ((string)(this["apiKey"]));
+                return ((string)(this["apikey"]));
             }
             set {
-                this["apiKey"] = value;
+                this["apikey"] = value;
             }
         }
         

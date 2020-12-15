@@ -121,7 +121,6 @@ namespace WeatherApp.ViewModels
                         { 
                             temperatures.Insert(0, CurrentTemp);
                             RawText = CurrentTemp.ToString() + Environment.NewLine + RawText;
-                            //Debug.WriteLine(CurrentTemp);
 
                         }
                     }

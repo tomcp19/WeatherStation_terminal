@@ -30,13 +30,13 @@ namespace WeatherApp.ViewModels
 
         private void SaveConfiguration(string obj)
         {
-            Properties.Settings.Default.apiKey = ApiKey;
+            Properties.Settings.Default.apikey = ApiKey;
             Properties.Settings.Default.Save();
         }
 
         private string GetApiKey()
         {
-            return Properties.Settings.Default.apiKey;
+            return Properties.Settings.Default.apikey;
         }
 
     }
