@@ -110,12 +110,20 @@ namespace WeatherApp.ViewModels
 
                     //temperatures.Add(CurrentTemp);
                     //Save();
-                    if (CurrentTemp.DateTime != temperatures[0].DateTime && CurrentTemp.City != temperatures[0].City)
-                    { 
+                    if(temperatures.Count == 0)
+                    {
                         temperatures.Insert(0, CurrentTemp);
                         RawText = CurrentTemp.ToString() + Environment.NewLine + RawText;
-                        //Debug.WriteLine(CurrentTemp);
+                    }
+                    else
+                    { 
+                        if (CurrentTemp.DateTime != temperatures[0].DateTime && CurrentTemp.City != temperatures[0].City)
+                        { 
+                            temperatures.Insert(0, CurrentTemp);
+                            RawText = CurrentTemp.ToString() + Environment.NewLine + RawText;
+                            //Debug.WriteLine(CurrentTemp);
 
+                        }
                     }
                 }
             }
