@@ -92,20 +92,36 @@ namespace WeatherApp.ViewModels
 
         private async Task GetTempAsync()
         {
-            CurrentTemp = await TemperatureService.GetTempAsync();
-
-            if (CurrentTemp != null)
+            try
             {
-                /// TODO 01 : Insérer la température à la position 0 de la collection
-                /// Description détaillée :
-                /// À chaque fois que l'on clique sur le bouton "Get Data". On veut 
-                /// insérer la température à la position 0 de la collection.
-                /// La température n'est insérée que si la date/heure ET la ville de la
-                /// dernière température insérée dans la liste est différente
-                /// que celle que l'on vient de récupérer.
-                /// Utiliser la méthode Insert de la collection
+                CurrentTemp = await TemperatureService.GetTempAsync();
 
-                Debug.WriteLine(CurrentTemp);
+                if (CurrentTemp != null)
+                {
+                    /// TODO 01 : Insérer la température à la position 0 de la collection
+                    /// Description détaillée :
+                    /// À chaque fois que l'on clique sur le bouton "Get Data". On veut 
+                    /// insérer la température à la position 0 de la collection.
+                    /// La température n'est insérée que si la date/heure ET la ville de la
+                    /// dernière température insérée dans la liste est différente
+                    /// que celle que l'on vient de récupérer.
+                    /// Utiliser la méthode Insert de la collection
+                    /// 
+
+                    //temperatures.Add(CurrentTemp);
+                    //Save();
+                    if (CurrentTemp.DateTime != temperatures[0].DateTime && CurrentTemp.City != temperatures[0].City)
+                    { 
+                        temperatures.Insert(0, CurrentTemp);
+                        RawText = CurrentTemp.ToString() + Environment.NewLine + RawText;
+                        //Debug.WriteLine(CurrentTemp);
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                City = e.Message;
             }
         }
 

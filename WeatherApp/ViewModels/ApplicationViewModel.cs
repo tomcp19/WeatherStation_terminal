@@ -57,10 +57,12 @@ namespace WeatherApp.ViewModels
 
         /// <summary>
         /// TODO 02 : Ajouter ImportCommand
+        public DelegateCommand<string> ImportDataCommand { get; set; }
         /// </summary>
 
         /// <summary>
         /// TODO 02 : Ajouter ExportCommand
+        public DelegateCommand<string> ExportDataCommand { get; set; }
         /// </summary>
 
         /// <summary>
