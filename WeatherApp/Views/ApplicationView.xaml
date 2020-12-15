@@ -29,6 +29,10 @@
                 <MenuItem Header="Preferences..." Command="{Binding ChangePageCommand}" CommandParameter="ConfigurationViewModel"/>
                 <Separator />
                 <!-- TODO 10 : Ajouter Importer et exporter -->
+                <Separator />
+                <MenuItem Header="Load Data" Command="{Binding ImportDataCommand}" />
+                <MenuItem Header="Save Data" Command="{Binding ExportDataCommand}" />
+                <Separator />
             </MenuItem>
         </Menu>
         <ContentControl Content="{Binding CurrentViewModel}"/>

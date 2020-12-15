@@ -15,7 +15,40 @@
         <Button DockPanel.Dock="Top" Content="Get Data" Command="{Binding GetTempCommand}"/>
         <!-- TODO 01b : Ajouter la ListView qui est liée avec la collection de Temperatures -->
         <!-- Voir la solution 14_pratique_examen, projet : demo_listView -->
-        <ListView/>
+        <ListView ItemsSource="{Binding Temperatures}"  MaxHeight="300">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="{x:Type models:TemperatureModel}">
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="City : "/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding City,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Date/Time : "/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DateTime,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Temperature : "/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Temperature,UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                                                     
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
 
     </DockPanel>
 </UserControl>

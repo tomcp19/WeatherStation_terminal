@@ -197,7 +197,7 @@ namespace WeatherApp.ViewModels
             ///   Appeler la méthode saveToFile
             ///   
 
-            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous exporter ces données dans ce fichier?", "Exportation", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous exporter ces données dans un fichier?", "Exportation", MessageBoxButton.YesNo);
             switch (result)
             {
                 case MessageBoxResult.Yes:
@@ -283,7 +283,7 @@ namespace WeatherApp.ViewModels
             ///   Garder le nom du fichier dans Filename
             ///   Appeler la méthode openFromFile
             ///   
-            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous importer ces données?", "Importation", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous importer des données à partir d'un fichier?", "Importation", MessageBoxButton.YesNo);
             switch (result)
             {
                 case MessageBoxResult.Yes:
