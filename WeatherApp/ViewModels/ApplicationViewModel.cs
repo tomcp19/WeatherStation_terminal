@@ -1,9 +1,14 @@
-﻿using Ookii.Dialogs.Wpf;
+﻿using Newtonsoft.Json;
+using Ookii.Dialogs.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using WeatherApp.Commands;
 using WeatherApp.Services;
+using WeatherApp.Models;
 
 namespace WeatherApp.ViewModels
 {
@@ -50,6 +55,17 @@ namespace WeatherApp.ViewModels
             }
         }
 
+        private string fileContent;
+        public string FileContent
+        {
+            get { return fileContent; }
+            set
+            {
+                fileContent = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Commande pour changer la page à afficher
         /// </summary>
@@ -86,9 +102,9 @@ namespace WeatherApp.ViewModels
 
             /// TODO 06 : Instancier ExportCommand qui doit appeler la méthode Export
             /// Ne peut s'exécuter que la méthode CanExport retourne vrai
-
+            ExportDataCommand = new DelegateCommand<string>(Export, CanExport);
             /// TODO 03 : Instancier ImportCommand qui doit appeler la méthode Import
-           ImportDataCommand = new DelegateCommand<string>(Import);
+            ImportDataCommand = new DelegateCommand<string>(Import);
             /// TODO 13b : Instancier ChangeLanguageCommand qui doit appeler la méthode ChangeLanguage
 
             initViewModels();          
@@ -213,6 +229,21 @@ namespace WeatherApp.ViewModels
             /// Lire le contenu du fichier
             /// Désérialiser dans un liste de TemperatureModel
             /// Remplacer le contenu de la collection de Temperatures avec la nouvelle liste
+            /// 
+            using (var sr = new StreamReader(Filename))
+            {
+                //FileContent = "-- FileContent --" + Environment.NewLine;
+                FileContent += sr.ReadToEnd();
+
+                if (FileContent != "")
+                {
+
+                    tvm.Temperatures = JsonConvert.DeserializeObject<ObservableCollection<TemperatureModel>>(FileContent);
+                    //tvm.RawText = string.Join(Environment.NewLine, tvm.Temperatures);
+                    FileContent = "";
+                }
+
+            }
 
         }
 
@@ -234,6 +265,21 @@ namespace WeatherApp.ViewModels
             /// Si la réponse de la boîte de dialogue est vraie
             ///   Garder le nom du fichier dans Filename
             ///   Appeler la méthode openFromFile
+            ///   
+            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous importer ces données?", "Importation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        Filename = openFileDialog.FileName;
+                        openFromFile();
+                    }
+                    break;
+
+                case MessageBoxResult.No:
+                    break;
+            }
 
         }
 
