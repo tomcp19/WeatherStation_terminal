@@ -167,7 +167,9 @@ namespace WeatherApp.ViewModels
         /// <returns></returns>
         private bool CanExport(string obj)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            if (tvm.Temperatures != null) return true;
+            else return false;
         }
 
         /// <summary>
@@ -194,6 +196,21 @@ namespace WeatherApp.ViewModels
             ///   Garder le nom du fichier dans Filename
             ///   Appeler la méthode saveToFile
             ///   
+
+            MessageBoxResult result = MessageBox.Show($"Souhaitez-vous exporter ces données dans ce fichier?", "Exportation", MessageBoxButton.YesNo);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        Filename = openFileDialog.FileName;
+                       saveToFile();
+                    }
+                    break;
+
+                case MessageBoxResult.No:
+                    break;
+            }
 
         }
 
