@@ -227,7 +227,14 @@ namespace WeatherApp.ViewModels
             /// Initilisation du StreamWriter
             /// Sérialiser la collection de températures
             /// Écrire dans le fichier
-            /// Fermer le fichier           
+            /// Fermer le fichier   
+            var resultat = JsonConvert.SerializeObject(tvm.Temperatures, Formatting.Indented);
+
+            using (var tw = new StreamWriter(filename, false))
+            {
+                tw.WriteLine(resultat);
+                tw.Close();
+            }
 
         }
 
